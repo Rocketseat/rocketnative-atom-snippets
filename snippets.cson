@@ -1,0 +1,234 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+
+'.source.js':
+  # Snippet StyleSheet
+  'style':
+    'prefix': 'styles'
+    'description': 'Create react-native Style file'
+    'body': """
+      import { StyleSheet } from 'react-native';
+      const styles = StyleSheet.create({
+        ${1}
+      });
+      export default styles;
+    """
+
+  # Snippet ApiSauce
+  'apisauce':
+    'prefix': 'apisauce'
+    'description': 'Create APISauce Config'
+    'body': """
+      import { create } from 'apisauce';
+      const api = create({
+        baseURL: '${1:http://localhost:3000}',
+      });
+      export default api;
+    """
+
+  # Snippet Module Resolve
+  'moduleResolver':
+    'prefix': 'moduleResolver'
+    'description': 'Create Module Resolver config'
+    'body': """
+      "plugins": [
+        [
+          "module-resolver",
+          {
+            "root": ["./src"],
+            "extensions": [".js", ".ios.js", ".android.js"]
+          }
+        ]
+      ]
+    """
+
+  # Snippet Component
+  'component':
+    'prefix': 'component'
+    'description': 'Create react-native component'
+    'body': """
+      /* Core */
+      import React, { Component } from 'react';
+      /* Presentational */
+      import { View } from 'react-native';
+      // import styles from './styles';
+      export default class ${1:${TM_FILENAME/(.+)\..+|.*/$1/:MyComponent}} extends Component {
+        render() {
+          return (
+            <View />
+          );
+        }
+      }
+    """
+
+  # Snippet Default props
+  'defaultprops':
+    'prefix': 'defaultprops'
+    'description': 'Create component defaultProps'
+    'body': """
+      static defaultProps = {
+        ${1}
+      };
+    """
+
+  # Snippet Eslint
+  'eslint':
+    'prefix': 'eslint'
+    'description': 'Create eslint file config'
+    'body': """
+    {
+      "parser": "babel-eslint",
+      "env": {
+        "browser": true,
+        "jest": true
+      },
+      "plugins": [
+        "react-native",
+        "jsx-a11y",
+        "import"
+      ],
+      "extends": [
+        "airbnb",
+        "plugin:react-native/all"
+      ],
+      "rules": {
+        "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+        "global-require": "off",
+        "no-console": "off",
+        "import/prefer-default-export": "off",
+        "no-unused-vars": ["error", {"argsIgnorePattern": "^_"}]
+      },
+      "settings": {
+        "import/resolver": {
+          "babel-module": {}
+        }
+      },
+      "globals": {
+        "__DEV__": true
+      }
+    }
+    """
+
+  # Snippet Method Render
+  'render':
+    'prefix': 'render'
+    'description': 'Create render method'
+    'body': """
+    render() {
+      return (
+        ${1:<View />}
+      );
+    }
+    """
+
+  # Snippet PropTypes
+  'proptypes':
+    'prefix': 'proptypes'
+    'description': 'Create component propTypes'
+    'body': """
+    static propTypes = {
+      ${1}
+    };
+    """
+
+  'teste':
+    'prefix': 'teste'
+    'description': 'teste de description'
+    'body': """
+      teste
+    """
+  # Snippet mapDispatchToProps
+  'mapdispatchtoprops':
+    'prefix': 'mapdispatchtoprops'
+    'description': 'Create redux mapDispatchToProps'
+    'body': """
+    const mapDispatchToProps = dispatch => ({
+      ${1}
+    });
+    """
+
+  # Snippet mapStateToProps
+  'mapStateToProps':
+    'prefix': 'mapStateToProps'
+    'description': 'Create redux mapStateToProps'
+    'body': """
+    const mapStateToProps = state => ({
+      ${1}
+    });
+    """
+
+  # Snippet configureStore
+  'configureStore':
+    'prefix': 'configureStore'
+    'description': 'Create configureStore file'
+    'body': """
+    import { createStore, applyMiddleware, compose } from 'redux';
+    export default (rootReducer) => {
+      const middleware = [];
+      const enhancers = [];
+      /* Saga */
+      // const sagaMonitor = __DEV__ ? console.tron.createSagaMonitor() : null;
+      // const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+      // middleware.push(sagaMiddleware);
+      enhancers.push(applyMiddleware(...middleware));
+      /* Store */
+      const createAppropriateStore = __DEV__ ? console.tron.createStore : createStore;
+      const store = createAppropriateStore(rootReducer, compose(...enhancers));
+      /* Run Saga */
+      // sagaMiddleware.run(rootSaga);
+      return store;
+    };
+    """
+
+  # Snippet reduxSetup
+  'setupredux':
+    'prefix': 'setupredux'
+    'description': 'Create Redux Setup file'
+    'body': """
+    import { combineReducers } from 'redux';
+    /* Reducers */
+    // import navReducer from 'navigation/reducer';
+    import configureStore from './configureStore';
+    // import rootSaga from './sagas';
+    export default () => {
+      const rootReducer = combineReducers({
+        // nav: navReducer,
+      });
+      return configureStore(rootReducer, rootSaga);
+    };
+    """
+
+  # Snippet reactotronconfig
+  'reactotronconfig':
+    'prefix': 'reactotronconfig'
+    'description': 'Create Redux Setup file'
+    'body': """
+    import Reactotron from 'reactotron-react-native';
+    if (__DEV__) {
+      const tron = Reactotron
+        .configure()
+        .useReactNative()
+        .connect();
+      tron.clear();
+      console.tron = tron;
+    }
+    """
